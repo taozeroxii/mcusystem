@@ -1,16 +1,27 @@
 <template>
-  <v-container class="grey lighten-5">
-    <v-row v-for="n in 2" :key="n" :class="n === 1 ? 'mb-6' : ''" no-gutters>
-      <v-col v-for="k in n + 1" :key="k">
-        <v-card class="pa-2" outlined tile> {{ k }} of {{ n + 1 }} </v-card>
-      </v-col>
-    </v-row>
-  </v-container>
+  <v-container>
+    <form>
+      <v-text-field
+        :counter="10"
+        label="Name"
+        required
+      ></v-text-field>
+      <v-text-field
+        label="E-mail"
+        required
+
+      ></v-text-field>
+
+
+      <v-btn class="mr-4" > submit </v-btn>
+      <v-btn > clear </v-btn>
+    </form></v-container
+  >
 </template>
 
 <script>
 export default {
-  name: "Login",
+  name: "login",
 };
 </script>
 

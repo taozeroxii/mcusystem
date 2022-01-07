@@ -1,20 +1,17 @@
 <template>
   <div>
-    <hello-world />
-
-    <v-row no-gutters>
-      <v-col order="first">
-        <v-card class="pa-2" outlined tile>
-          <Cardtem :dataforcard="dataforcard" />
-        </v-card>
-      </v-col>
-      <v-col order="last">
-        <v-card class="pa-2" outlined tile> last </v-card>
-      </v-col>
-      <v-col>
-        <v-card class="pa-2" outlined tile> Second, but unordered </v-card>
-      </v-col>
-    </v-row>
+    <hello-world /><v-container class="grey lighten-5">
+      <v-row>
+        <v-col
+          order="first"
+          class="col-12 col-md-6 col-lg-3"
+          v-for="(item, index) in dataforcard"
+          :key="index"
+          :class="item === 1 ? 'mb-6' : ''"
+        >
+          <Cardtem :dataforcard="dataforcard[index]" />
+        </v-col> </v-row
+    ></v-container>
   </div>
 </template>
 
@@ -28,16 +25,9 @@ export default {
   name: "Home",
   data() {
     return {
-      dataforcard: 
-        {
-          status: "เชื่อมต่อ",
-          show: false,
-          temnow: null,
-          moisture_now: null,
-          updatetime: null,
-          timeinterval: new Date().toLocaleString(),
-          myInterval: null,
-        },
+      timeinterval: new Date().toLocaleString(),
+      myInterval: null,
+      dataforcard: [],
     };
   },
   components: {
@@ -46,11 +36,15 @@ export default {
   },
   created() {
     axios.get("http://localhost:3015/api/mcusystem").then((response) => {
-      this.dataforcard.temnow = response.data.mcu_temp;
-      this.dataforcard.moisture_now = response.data.mcu_moisture;
-      this.dataforcard.updatetime = moment(response.data.mcu_update_time).format("DD/MM/YYYY HH:mm:ss");
-      // if(this.timeinterval -  this.updatetime ){ this.status = 'เชื่อมต่อ';}else { this.status = 'ขาดการเชื่อมต่อ'; }
-      // console.log(this.dataforcard.updatetime);
+      for (var i = 0; i < response.data.length; i++) {
+        this.dataforcard.push({
+          temnow: response.data[i].mcu_temp,
+          moisture_now: response.data[i].mcu_moisture,
+          updatetime: moment(response.data[i].mcu_update_time).format(
+            "DD/MM/YYYY HH:mm:ss"
+          ),
+        });
+      }
     });
   },
 
@@ -62,15 +56,25 @@ export default {
     update_temp_interva() {
       this.myInterval = setInterval(() => {
         axios.get("http://localhost:3015/api/mcusystem").then((response) => {
-          this.dataforcard.temnow = response.data.mcu_temp;
-          this.dataforcard.moisture_now = response.data.mcu_moisture;
-          this.dataforcard.updatetime = moment( response.data.mcu_update_time ).format("DD/MM/YYYY HH:mm:ss");
+          // this.dataforcard.temnow = response.data.mcu_temp;
+          // this.dataforcard.moisture_now = response.data.mcu_moisture;
+          // this.dataforcard.updatetime = moment(  response.data.mcu_update_time ).format("DD/MM/YYYY HH:mm:ss");
+          this.dataforcard = [];
+          for (var i = 0; i < response.data.length; i++) {
+            this.dataforcard.push({
+              temnow: response.data[i].mcu_temp,
+              moisture_now: response.data[i].mcu_moisture,
+              updatetime: moment(response.data[i].mcu_update_time).format("DD/MM/YYYY HH:mm:ss" ),
+            });
+          }
         });
-      }, 10000);
+      }, 3000);
+      
     },
   },
 
   destroyed() {
+    this.dataforcard = [];
     clearInterval(this.myInterval); // เครียค่า interval เมื่อทำการเปลี่ยนหน้า
   },
 };

@@ -3,7 +3,7 @@
     <v-app-bar app >
       <v-toolbar-title>Mcu System temperature</v-toolbar-title>
       <v-spacer></v-spacer>
-      TIME :{{ timeinterval }}
+       {{ timeinterval }}
       <v-btn icon>
         <v-icon>mdi-dots-vertical</v-icon>
       </v-btn>
