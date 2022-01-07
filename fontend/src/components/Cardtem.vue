@@ -1,6 +1,6 @@
 <template>
   <v-card color="#385F73" dark class="mx-auto" max-width="344">
-    <v-card-title>id: {{this.$props.dataforcard.id}} addr : {{this.$props.dataforcard.mcu_addr}}  </v-card-title><br />
+    <v-card-title>id: {{this.$props.dataforcard.id}} ที่ : {{this.$props.dataforcard.mcu_addr}}  </v-card-title><br />
     <v-card-subtitle class="justify-center"
       ><h1>อุณหภูมิ &nbsp;: {{ this.$props.dataforcard.temnow}} °C</h1>
       <br />

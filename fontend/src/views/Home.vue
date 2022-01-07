@@ -1,20 +1,10 @@
 <template>
   <div>
     <v-container class="grey lighten-5">
-      <v-alert
-        text
-        prominent
-        type="error"
-        icon="mdi-cloud-alert"
-        v-if="ck_connect" > ไม่สามารถเชื่อมต่อกับฐานข้อมูลได้</v-alert >
+      <v-alert text  prominent type="error"  icon="mdi-cloud-alert"  v-if="ck_connect" > ไม่สามารถเชื่อมต่อกับฐานข้อมูลได้</v-alert >
 
       <v-row v-if="!ck_connect">
-        <v-col
-          order="first"
-          class="col-12 col-md-6 col-lg-3"
-          v-for="(item, index) in dataforcard"
-          :key="index"
-          :class="item === 1 ? 'mb-6' : ''">
+        <v-col  order="first"   class="col-12 col-md-6 col-lg-3" v-for="(item, index) in dataforcard" :key="index"  :class="item === 1 ? 'mb-6' : ''">
           <Cardtem :dataforcard="dataforcard[index]" />
         </v-col> 
       </v-row>
