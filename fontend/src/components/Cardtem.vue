@@ -1,10 +1,15 @@
 <template>
   <v-card color="#385F73" dark class="mx-auto" max-width="344">
-    <v-card-title>id: {{this.$props.dataforcard.id}} ที่ : {{this.$props.dataforcard.mcu_addr}}  </v-card-title><br />
+    <v-card-title>
+      {{ this.$props.dataforcard.mcu_addr }}
+      {{ this.$props.dataforcard.id }}</v-card-title
+    ><br />
     <v-card-subtitle class="justify-center"
-      ><h1>อุณหภูมิ &nbsp;: {{ this.$props.dataforcard.temnow}} °C</h1>
+      ><h1>อุณหภูมิ &nbsp;: {{ this.$props.dataforcard.temnow }} °C</h1>
       <br />
-      <h1>ความชื้น &nbsp;: {{ this.$props.dataforcard.moisture_now }} %</h1></v-card-subtitle
+      <h1>
+        ความชื้น &nbsp;: {{ this.$props.dataforcard.moisture_now }} %
+      </h1></v-card-subtitle
     >
     <v-card-actions>
       <v-spacer></v-spacer>
@@ -18,7 +23,8 @@
         <v-divider></v-divider>
         <v-card-text v-if="this.$props.dataforcard.temnow">
           ข้อมูลอุณหภูมิจะถูกอัพเดทในทุกๆ 30 วินาที <br />ข้อมูลอัพเดทล่าสุด ณ
-         {{ this.$props.dataforcard.updatetime }} น. <br />สถานะ : {{ status }}
+          {{ this.$props.dataforcard.updatetime }} น. <br />สถานะ :
+          {{ this.$props.dataforcard.status }}
         </v-card-text>
       </div>
     </v-expand-transition>
@@ -38,11 +44,10 @@ export default {
     dataforcard: {
       required: true,
     },
-  },mounted() {
+  },
+  mounted() {
     //   console.log(this.dataforcard)
   },
-
-  
 };
 </script>
 
