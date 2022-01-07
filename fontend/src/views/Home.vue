@@ -53,9 +53,16 @@ export default {
             id: response.data[i].mcu_id,
             mcu_addr: response.data[i].mcu_addr,
             temnow: response.data[i].mcu_temp,
+            elect: response.data[i].mcu_elect,
             moisture_now: response.data[i].mcu_moisture,
-            updatetime: moment(response.data[i].mcu_update_time).format( "DD/MM/YYYY HH:mm:ss"),
-            status: this.alertErrorTime( moment(response.data[i].mcu_update_time).format( "YYYY-MM-DD HH:mm:ss"))
+            updatetime: moment(response.data[i].mcu_update_time).format(
+              "DD/MM/YYYY HH:mm:ss"
+            ),
+            status: this.alertErrorTime(
+              moment(response.data[i].mcu_update_time).format(
+                "YYYY-MM-DD HH:mm:ss"
+              )
+            ),
           });
         }
       })
@@ -85,9 +92,16 @@ export default {
                 id: response.data[i].mcu_id,
                 mcu_addr: response.data[i].mcu_addr,
                 temnow: response.data[i].mcu_temp,
+                elect: response.data[i].mcu_elect,
                 moisture_now: response.data[i].mcu_moisture,
-                updatetime: moment(response.data[i].mcu_update_time).format("DD/MM/YYYY HH:mm:ss" ),
-                status: this.alertErrorTime( moment(response.data[i].mcu_update_time).format( "YYYY-MM-DD HH:mm:ss"))
+                updatetime: moment(response.data[i].mcu_update_time).format(
+                  "DD/MM/YYYY HH:mm:ss"
+                ),
+                status: this.alertErrorTime(
+                  moment(response.data[i].mcu_update_time).format(
+                    "YYYY-MM-DD HH:mm:ss"
+                  )
+                ),
               });
             }
           })
