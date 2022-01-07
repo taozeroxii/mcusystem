@@ -38,6 +38,8 @@ export default {
     axios.get("http://localhost:3015/api/mcusystem").then((response) => {
       for (var i = 0; i < response.data.length; i++) {
         this.dataforcard.push({
+          id: response.data[i].mcu_id,
+          mcu_addr: response.data[i].mcu_addr,
           temnow: response.data[i].mcu_temp,
           moisture_now: response.data[i].mcu_moisture,
           updatetime: moment(response.data[i].mcu_update_time).format(
@@ -62,6 +64,8 @@ export default {
           this.dataforcard = [];
           for (var i = 0; i < response.data.length; i++) {
             this.dataforcard.push({
+              id: response.data[i].mcu_id,
+              mcu_addr: response.data[i].mcu_addr,
               temnow: response.data[i].mcu_temp,
               moisture_now: response.data[i].mcu_moisture,
               updatetime: moment(response.data[i].mcu_update_time).format("DD/MM/YYYY HH:mm:ss" ),

@@ -1,6 +1,6 @@
 <template>
   <v-card color="#385F73" dark class="mx-auto" max-width="344">
-    <v-card-title> อุณหภูมิห้องศูนย์คอมพิวเตอร์ MCU 1</v-card-title><br />
+    <v-card-title> {{this.$props.dataforcard.mcu_addr}}  {{this.$props.dataforcard.id}}</v-card-title><br />
     <v-card-subtitle class="justify-center"
       ><h1>อุณหภูมิ &nbsp;: {{ this.$props.dataforcard.temnow}} °C</h1>
       <br />
