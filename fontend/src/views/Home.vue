@@ -11,7 +11,7 @@
         ไม่สามารถเชื่อมต่อกับฐานข้อมูลได้</v-alert
       >
 
-      <v-row   v-if="!ck_connect">
+      <v-row v-if="!ck_connect">
         <v-col
           order="first"
           class="col-12 col-md-6 col-lg-3"
@@ -54,9 +54,8 @@ export default {
             mcu_addr: response.data[i].mcu_addr,
             temnow: response.data[i].mcu_temp,
             moisture_now: response.data[i].mcu_moisture,
-            updatetime: moment(response.data[i].mcu_update_time).format(
-              "DD/MM/YYYY HH:mm:ss"
-            ),
+            updatetime: moment(response.data[i].mcu_update_time).format( "DD/MM/YYYY HH:mm:ss"),
+            status: this.alertErrorTime( moment(response.data[i].mcu_update_time).format( "YYYY-MM-DD HH:mm:ss"))
           });
         }
       })
@@ -87,9 +86,8 @@ export default {
                 mcu_addr: response.data[i].mcu_addr,
                 temnow: response.data[i].mcu_temp,
                 moisture_now: response.data[i].mcu_moisture,
-                updatetime: moment(response.data[i].mcu_update_time).format(
-                  "DD/MM/YYYY HH:mm:ss"
-                ),
+                updatetime: moment(response.data[i].mcu_update_time).format("DD/MM/YYYY HH:mm:ss" ),
+                status: this.alertErrorTime( moment(response.data[i].mcu_update_time).format( "YYYY-MM-DD HH:mm:ss"))
               });
             }
           })
@@ -98,6 +96,13 @@ export default {
             this.ck_connect = true;
           });
       }, 3000);
+    },
+    alertErrorTime(time) {
+      this.atime = Math.round(
+        Math.abs(new Date(time) - new Date()) / 1000 / 60
+      );
+      if (this.atime >= 3) return "ไม่เชื่อมต่อ";
+      return "เชื่อมต่อ";
     },
   },
 
