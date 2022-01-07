@@ -1,5 +1,5 @@
 <template>
-  <v-card color="#385F73" dark class="mx-auto" max-width="344">
+  <v-card color="" class="mx-auto" max-width="344">
     <v-card-title>
       <p>
         {{ this.$props.dataforcard.mcu_addr }}
