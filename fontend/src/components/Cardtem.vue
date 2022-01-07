@@ -8,21 +8,33 @@
       <p
         :class="
           this.$props.dataforcard.status == 'เชื่อมต่อ'
-            ? 'green--text'
-            : 'red--text'
+            ? 'green--text form-control'
+            : 'red--text form-control'
         "
       >
         {{ "&nbsp;" + this.$props.dataforcard.status }}
-      </p> </v-card-title
-    ><br />
+      </p>
+    </v-card-title>
     <v-card-subtitle class="justify-center"
-      ><h1>กระแสไฟ &nbsp;: {{ this.$props.dataforcard.elect }} V</h1>
+      ><h2
+        :class="
+          this.$props.dataforcard.elect > 200 ? 'green--text' : 'red--text'
+        "
+      >
+        กระแสไฟ &nbsp;: {{ this.$props.dataforcard.elect }} V
+      </h2>
       <br />
-      <h1>อุณหภูมิ &nbsp;: {{ this.$props.dataforcard.temnow }} °C</h1>
+      <h2
+        :class="
+          this.$props.dataforcard.temnow < 22 ? 'green--text' : 'red--text'
+        "
+      >
+        อุณหภูมิ &nbsp;: {{ this.$props.dataforcard.temnow }} °C
+      </h2>
       <br />
-      <h1>
+      <h2>
         ความชื้น &nbsp;: {{ this.$props.dataforcard.moisture_now }} %
-      </h1></v-card-subtitle
+      </h2></v-card-subtitle
     >
     <v-card-actions>
       <v-spacer></v-spacer>
@@ -63,4 +75,7 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.form-control {
+}
+</style>
