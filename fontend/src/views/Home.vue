@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-container class="grey lighten-5">
+    <v-container class="lighten-5">
       <v-alert
         text
         prominent
@@ -20,8 +20,9 @@
           :class="item === 1 ? 'mb-6' : ''"
         >
           <Cardtem :dataforcard="dataforcard[index]" />
-        </v-col> </v-row
-    ></v-container>
+        </v-col>
+      </v-row>
+    </v-container>
   </div>
 </template>
 
@@ -44,7 +45,7 @@ export default {
     Cardtem,
   },
   created() {
-    axios.get("http://localhost:3015/api/mcusystem").then((response) => {
+    axios.get("api/mcusystem").then((response) => {
         this.ck_connect = false;
         for (var i = 0; i < response.data.length; i++) {
           this.dataforcard.push({
@@ -77,7 +78,7 @@ export default {
   methods: {
     update_temp_interva() {
       this.myInterval = setInterval(() => {
-        axios.get("http://localhost:3015/api/mcusystem") .then((response) => {
+        axios.get("api/mcusystem") .then((response) => {
             // this.dataforcard.temnow = response.data.mcu_temp;
             // this.dataforcard.moisture_now = response.data.mcu_moisture;
             // this.dataforcard.updatetime = moment(  response.data.mcu_update_time ).format("DD/MM/YYYY HH:mm:ss");
