@@ -9,7 +9,7 @@
     </v-card-title>
   
     <v-card-subtitle class="justify-center" > 
-      <p>  Mcu data Id : {{ this.$props.dataforcard.id }}&nbsp;<small class="font-italic">status : {{this.$props.dataforcard.status}}</small></p>  
+      <p >  Mcu Id : {{ this.$props.dataforcard.id }}&nbsp; status :<small :class="this.$props.dataforcard.status  =='เชื่อมต่อ' ?'green--text font-italic': 'red--text font-italic'"> {{this.$props.dataforcard.status}}</small></p>  
       <hr class="mb-5">
 
       <v-card-text>
