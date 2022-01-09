@@ -107,7 +107,7 @@ export default {
             // console.log(error);
             this.ck_connect = true;
           });
-      }, 3000);
+      }, 30000);
     },
     alertErrorTime(time) {
       this.atime = Math.round(
