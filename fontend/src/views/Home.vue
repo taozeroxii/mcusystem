@@ -115,7 +115,7 @@ export default {
       this.atime = Math.round(
         Math.abs(new Date(time) - new Date()) / 1000 / 60
       );
-      if (this.atime >= 3) return "ไม่เชื่อมต่อ";
+      if (this.atime >= 3) return "ขาดการเชื่อมต่อ";
       return "เชื่อมต่อ";
     },
   },
