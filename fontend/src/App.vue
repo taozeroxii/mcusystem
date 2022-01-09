@@ -7,12 +7,20 @@
       <v-btn icon>
         <v-icon>mdi-dots-vertical</v-icon>
       </v-btn>
+      <v-menu  bottom left> </v-menu>
+
+      <template v-slot:extension>
+        <v-tabs align-with-title>
+          <v-tab to="/"> HOME &nbsp;<v-icon small>home </v-icon></v-tab>
+          <v-tab to="/about">About   &nbsp; <v-icon small>info</v-icon></v-tab>
+          <v-tab to="/Login"> Login &nbsp;<v-icon small> mdi-wrench </v-icon></v-tab>
+        </v-tabs>
+      </template>
     </v-app-bar>
 
-    <v-main>
-      <router-link to="/"><v-btn color="blue-grey" class="ma-2 white--text"> HOME &nbsp;<v-icon small>home </v-icon></v-btn ></router-link>
-      <router-link to="/about"><v-btn class="ma-2 " > About   &nbsp; <v-icon small>info</v-icon></v-btn></router-link>
-      <router-link to="/Login"><v-btn  class="ma-2 " > Login &nbsp;<v-icon small> mdi-wrench </v-icon></v-btn></router-link> 
+ 
+
+    <v-main class="mt-3">
      
       <router-view />
       
@@ -41,7 +49,4 @@ export default {
 A:link {
   text-decoration: none;
 }
-
-
-
 </style>
