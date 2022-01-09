@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar app >
+    <v-app-bar app dark  src="https://picsum.photos/1920/1080?random">
       <v-toolbar-title>Mcu System temperature</v-toolbar-title>
       <v-spacer></v-spacer>
        {{ timeinterval }}
