@@ -5,6 +5,8 @@ import store from './store'
 import vuetify from './plugins/vuetify'
 import 'material-design-icons-iconfont'
 var moment = require('moment'); // require
+import './assets/styles.css';
+
 
 Vue.config.productionTip = false
 

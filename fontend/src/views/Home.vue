@@ -44,9 +44,7 @@ export default {
     Cardtem,
   },
   created() {
-    axios
-      .get("http://localhost:3015/api/mcusystem")
-      .then((response) => {
+    axios.get("http://localhost:3015/api/mcusystem").then((response) => {
         this.ck_connect = false;
         for (var i = 0; i < response.data.length; i++) {
           this.dataforcard.push({
@@ -79,9 +77,7 @@ export default {
   methods: {
     update_temp_interva() {
       this.myInterval = setInterval(() => {
-        axios
-          .get("http://localhost:3015/api/mcusystem")
-          .then((response) => {
+        axios.get("http://localhost:3015/api/mcusystem") .then((response) => {
             // this.dataforcard.temnow = response.data.mcu_temp;
             // this.dataforcard.moisture_now = response.data.mcu_moisture;
             // this.dataforcard.updatetime = moment(  response.data.mcu_update_time ).format("DD/MM/YYYY HH:mm:ss");
