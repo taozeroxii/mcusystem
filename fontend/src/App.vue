@@ -13,6 +13,7 @@
       <router-link to="/"><v-btn color="blue-grey" class="ma-2 white--text"> HOME &nbsp;<v-icon small>home </v-icon></v-btn ></router-link>
       <router-link to="/about"><v-btn class="ma-2 " > About   &nbsp; <v-icon small>info</v-icon></v-btn></router-link>
       <router-link to="/Login"><v-btn  class="ma-2 " > Login &nbsp;<v-icon small> mdi-wrench </v-icon></v-btn></router-link> 
+     
       <router-view />
       
     </v-main>
