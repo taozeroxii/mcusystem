@@ -1,31 +1,64 @@
 <template>
-  <v-card color="white" class="mx-auto loading rounded-xl" max-width="100%" >
+  <v-card color="white" class="mx-auto loading rounded-xl" max-width="100%">
     <v-card-title>
-      <h3> {{ this.$props.dataforcard.mcu_addr }}</h3>    
+      <h3>{{ this.$props.dataforcard.mcu_addr }}</h3>
       <v-spacer></v-spacer>
       <div v-if="this.$props.dataforcard.status == 'เชื่อมต่อ'">
-        <v-icon class="green--text form-control" > mdi-checkbox-marked-circle-outline</v-icon> 
-        <sub class="font-italic green--text text-decoration-overline " style="font-size:10px"> Connect</sub>
+        <v-icon class="green--text form-control">
+          mdi-checkbox-marked-circle-outline</v-icon
+        >
+        <sub
+          class="font-italic green--text text-decoration-overline"
+          style="font-size: 10px"
+        >
+          Connect</sub
+        >
       </div>
-      <div v-if="this.$props.dataforcard.status != 'เชื่อมต่อ'"> 
-        <v-icon class="red--text form-control" >  mdi-filter-remove-outline</v-icon>  
-        <sub class="font-italic red--text text-decoration-overline " style="font-size:10px"> Disconnect</sub>
+      <div v-if="this.$props.dataforcard.status != 'เชื่อมต่อ'">
+        <v-icon class="red--text form-control">
+          mdi-filter-remove-outline</v-icon
+        >
+        <sub
+          class="font-italic red--text text-decoration-overline"
+          style="font-size: 10px"
+        >
+          Disconnect</sub
+        >
       </div>
       <!-- <h3 :class="this.$props.dataforcard.status == 'เชื่อมต่อ'  ? 'green--text form-control'  : 'red--text form-control' "> {{ "&nbsp;" + this.$props.dataforcard.status }}</h3> -->
     </v-card-title>
 
-
-    <hr>
-    <v-card-subtitle class="justify-center " > 
-      <v-card-text>  
+    <hr />
+    <v-card-subtitle class="justify-center">
+      <v-card-text>
         <v-row align="center">
-          <v-col :class="this.$props.dataforcard.temnow < 26 ? 'green--text text-h6' : 'red--text text-h6 ' " cols="4" ><sup class="font-italic">อุณหภูมิ</sup><br> {{ this.$props.dataforcard.temnow }}&deg;C</v-col>
-          <v-col class="text-h6" cols="4"> <sup class="font-italic ">ความชื้น</sup> <br> {{ this.$props.dataforcard.moisture_now }} %   </v-col>
-          <v-col class="text-h6"  cols="4"><sup class="font-italic">กำลังไฟ</sup><br> {{ this.$props.dataforcard.elect }} V. </v-col>
-        </v-row> 
-      </v-card-text>   
+          <v-col
+            :class="
+              this.$props.dataforcard.temnow < 26
+                ? 'green--text text-h6'
+                : 'red--text text-h6 '
+            "
+            cols="4"
+            ><sup class="font-italic">อุณหภูมิ</sup><br />
+            {{ this.$props.dataforcard.temnow }}&deg;C</v-col
+          >
+          <v-col class="text-h6" cols="4">
+            <sup class="font-italic">ความชื้น</sup> <br />
+            {{ this.$props.dataforcard.moisture_now }} %
+          </v-col>
+          <v-col
+            :class="
+              this.$props.dataforcard.elect > 200
+                ? 'green--text text-h6'
+                : 'red--text text-h6 '
+            "
+            cols="4"
+            ><sup class="font-italic">กำลังไฟ</sup><br />
+            {{ this.$props.dataforcard.elect }} V.
+          </v-col>
+        </v-row>
+      </v-card-text>
     </v-card-subtitle>
-  
 
     <v-card-actions>
       <v-spacer></v-spacer>
@@ -38,10 +71,14 @@
       <div v-show="show">
         <v-divider></v-divider>
         <v-card-text v-if="this.$props.dataforcard.temnow">
-          <b>ข้อมูลอัพเดทล่าสุด ณ {{ this.$props.dataforcard.updatetime }} น. </b> <br>
-          <b>Mcu Id : {{ this.$props.dataforcard.id }} </b> | ค่าอุณหภูมิตั้งไว้ 26  &deg;C <br />
+          <b
+            >ข้อมูลอัพเดทล่าสุด ณ {{ this.$props.dataforcard.updatetime }} น.
+          </b>
+          <br />
+          <b>Mcu Id : {{ this.$props.dataforcard.id }} </b> | ค่าอุณหภูมิตั้งไว้
+          26 &deg;C <br />
           ข้อมูลอุณหภูมิจะถูกอัพเดทในทุกๆ 30 วินาที <br />
-          หากไม่มีการอัพเดทข้อมูล >= 3 นาที  = ขาดการเชื่อมต่อ
+          หากไม่มีการอัพเดทข้อมูล >= 3 นาที = ขาดการเชื่อมต่อ
         </v-card-text>
       </div>
     </v-expand-transition>
@@ -69,5 +106,4 @@ export default {
 </script>
 
 <style>
-
 </style>
