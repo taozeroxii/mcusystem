@@ -1,6 +1,7 @@
 <template>
   <div>
     <v-container class="lighten-5">
+      <v-text-field color="success" :loading="loading" disabled ></v-text-field>
       <v-alert
         text
         prominent
@@ -35,6 +36,7 @@ export default {
   name: "Home",
   data() {
     return {
+      loading:false,
       ck_connect: null,
       timeinterval: new Date().toLocaleString(),
       myInterval: null,
@@ -44,10 +46,10 @@ export default {
   components: {
     Cardtem,
   },
-  created() {
-    axios
-      .get("api/mcusystem")
-      .then((response) => {
+  created() {   
+    this.loading = true;
+    axios.get("api/mcusystem").then((response) => {
+        this.loading = false;
         this.ck_connect = false;
         for (var i = 0; i < response.data.length; i++) {
           this.dataforcard.push({
@@ -69,7 +71,7 @@ export default {
         }
       })
       .catch(() => {
-        // console.log(error);
+        this.loading = false;
         this.ck_connect = true;
       });
   },
@@ -81,9 +83,7 @@ export default {
   methods: {
     update_temp_interva() {
       this.myInterval = setInterval(() => {
-        axios
-          .get("api/mcusystem")
-          .then((response) => {
+        axios.get("api/mcusystem").then((response) => {
             // this.dataforcard.temnow = response.data.mcu_temp;
             // this.dataforcard.moisture_now = response.data.mcu_moisture;
             // this.dataforcard.updatetime = moment(  response.data.mcu_update_time ).format("DD/MM/YYYY HH:mm:ss");
@@ -94,7 +94,7 @@ export default {
                 id: response.data[i].mcu_id,
                 mcu_addr: response.data[i].mcu_addr,
                 temnow: response.data[i].mcu_temp,
-                elect: response.data[i].mcu_elect,
+                elect: response.data[i].mcu_elect < 0 ? 0 : response.data[i].mcu_elect,
                 moisture_now: response.data[i].mcu_moisture,
                 updatetime: moment(response.data[i].mcu_update_time).format(
                   "DD/MM/YYYY HH:mm:ss"
@@ -108,7 +108,7 @@ export default {
             }
           })
           .catch(() => {
-            // console.log(error);
+            this.loading = false;
             this.ck_connect = true;
           });
       }, 30000);

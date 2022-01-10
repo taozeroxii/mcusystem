@@ -13,9 +13,7 @@
         <v-tabs align-with-title>
           <v-tab to="/"> HOME &nbsp;<v-icon small>home </v-icon></v-tab>
           <v-tab to="/about">About &nbsp; <v-icon small>info</v-icon></v-tab>
-          <v-tab to="/Login">
-            Login &nbsp;<v-icon small> mdi-wrench </v-icon></v-tab
-          >
+          <v-tab to="/Login"> Login &nbsp;<v-icon small>mdi-login</v-icon></v-tab >
         </v-tabs>
       </template>
     </v-app-bar>
