@@ -3,7 +3,7 @@
     <v-card-title>
       <h3>{{ this.$props.dataforcard.mcu_addr }}</h3>
       <v-spacer></v-spacer>
-      <div v-if="this.$props.dataforcard.status == 'เชื่อมต่อ'">
+      <div v-if="this.$props.dataforcard.status">
         <v-icon class="green--text form-control">
           mdi-checkbox-marked-circle-outline</v-icon
         >
@@ -14,7 +14,7 @@
           Connect</sub
         >
       </div>
-      <div v-if="this.$props.dataforcard.status != 'เชื่อมต่อ'">
+      <div v-else>
         <v-icon class="red--text form-control">
           mdi-filter-remove-outline</v-icon
         >
@@ -33,28 +33,29 @@
       <v-card-text>
         <v-row align="center">
           <v-col
-            :class="
-              this.$props.dataforcard.temnow < 26
-                ? 'green--text text-h6'
-                : 'red--text text-h6 '
-            "
+            :class="this.$props.dataforcard.temnow < 27 ? '' : 'red--text'"
+            class="text-h6"
             cols="4"
             ><sup class="font-italic">อุณหภูมิ</sup><br />
             {{ this.$props.dataforcard.temnow }}&deg;C</v-col
           >
-          <v-col class="text-h6" cols="4">
+          <v-col
+            :class="
+              this.$props.dataforcard.moisture_now < 60 ? '' : 'red--text'
+            "
+            class="text-h6"
+            cols="4"
+          >
             <sup class="font-italic">ความชื้น</sup> <br />
             {{ this.$props.dataforcard.moisture_now }} %
           </v-col>
           <v-col
-            :class="
-              this.$props.dataforcard.elect > 200
-                ? 'green--text text-h6'
-                : 'red--text text-h6 '
-            "
+            :class="this.$props.dataforcard.elect > 200 ? '' : 'red--text'"
+            class="text-h6"
             cols="4"
             ><sup class="font-italic">กำลังไฟ</sup><br />
-            {{ this.$props.dataforcard.elect }} V.
+            {{ this.$props.dataforcard.elect }}
+            V
           </v-col>
         </v-row>
       </v-card-text>
@@ -90,7 +91,6 @@ export default {
   name: "cardtem",
   data() {
     return {
-      status: "เชื่อมต่อ",
       show: false,
     };
   },

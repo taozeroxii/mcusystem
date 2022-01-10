@@ -1,0 +1,24 @@
+{
+  "name": "mcusystem",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \"cd fontend && npm run serve\" \"cd backend && npm run start\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/taozeroxii/mcusystem.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/taozeroxii/mcusystem/issues"
+  },
+  "homepage": "https://github.com/taozeroxii/mcusystem#readme",
+  "dependencies": {
+    "concurrently": "^7.0.0"
+  }
+}

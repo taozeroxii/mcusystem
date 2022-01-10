@@ -11,7 +11,6 @@
         ไม่สามารถเชื่อมต่อกับฐานข้อมูลได้</v-alert
       >
 
-
       <v-row v-if="!ck_connect">
         <v-col
           order="first"
@@ -46,14 +45,17 @@ export default {
     Cardtem,
   },
   created() {
-    axios.get("api/mcusystem").then((response) => {
+    axios
+      .get("api/mcusystem")
+      .then((response) => {
         this.ck_connect = false;
         for (var i = 0; i < response.data.length; i++) {
           this.dataforcard.push({
             id: response.data[i].mcu_id,
             mcu_addr: response.data[i].mcu_addr,
             temnow: response.data[i].mcu_temp,
-            elect: response.data[i].mcu_elect,
+            elect:
+              response.data[i].mcu_elect < 0 ? 0 : response.data[i].mcu_elect,
             moisture_now: response.data[i].mcu_moisture,
             updatetime: moment(response.data[i].mcu_update_time).format(
               "DD/MM/YYYY HH:mm:ss"
@@ -79,7 +81,9 @@ export default {
   methods: {
     update_temp_interva() {
       this.myInterval = setInterval(() => {
-        axios.get("api/mcusystem") .then((response) => {
+        axios
+          .get("api/mcusystem")
+          .then((response) => {
             // this.dataforcard.temnow = response.data.mcu_temp;
             // this.dataforcard.moisture_now = response.data.mcu_moisture;
             // this.dataforcard.updatetime = moment(  response.data.mcu_update_time ).format("DD/MM/YYYY HH:mm:ss");
@@ -113,8 +117,8 @@ export default {
       this.atime = Math.round(
         Math.abs(new Date(time) - new Date()) / 1000 / 60
       );
-      if (this.atime >= 3) return "ขาดการเชื่อมต่อ";
-      return "เชื่อมต่อ";
+      if (this.atime >= 2) return false;
+      return true;
     },
   },
 
