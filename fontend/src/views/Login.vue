@@ -1,10 +1,10 @@
 <template>
   <v-container>
     <form @submit.prevent="onSubmit()">
-      <v-text-field label="username" name="username" required></v-text-field>
+      <v-text-field label="username"  v-model="form.username" required></v-text-field>
       <v-text-field
         :counter="6"
-        name="password"
+         v-model="form.password"
         label="password"
         type="password"
         required
@@ -28,8 +28,8 @@ export default {
   },
   methods: {
     onSubmit() {
-      console.log("test");
-      this.$router.push("./settingmenu");
+      console.log(this.form);
+      // this.$router.push("./settingmenu");
     },
     clearform() {
       this.form.username = null;
