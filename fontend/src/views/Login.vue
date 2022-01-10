@@ -10,7 +10,7 @@
         required
       ></v-text-field>
       <v-btn type="submit" color="success" class="mr-4"> submit </v-btn>
-      <v-btn @click="clearform" color="secondary"> clear </v-btn>
+      <v-btn @click="clearform" color="secondary" > clear </v-btn>
     </form></v-container
   >
 </template>
