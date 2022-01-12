@@ -2,7 +2,8 @@
      ดึงข้อมูลจากชุดคำสั่ง query ใน ฐานข้อมูล โดยมีการส่ง parameter พวกวันที่สิทธิเวลา และยิงชุด query ไปดึงข้อมูลเพื่อแสดงผลมาปั่นเอาค่าแสดงผลใน datable
 # fontend
      หน้า src/views/form/tableshowdata จะมีส่วนการดุึงข้อมูลจาก backend 
-     โดยใช้เป็น local ip 172.16.0.251 ไว้หากclone มาเปลียนเป็น http://localhost/:portที่กำหนด   ในส่วนนี้default port 3000
+     โดยใช้เป็น local ip 172.16.0.251 ไว้หาก clone มา
+     เปลียนเป็น http://localhost/:portที่กำหนดในbackend 
      npm install
      npm run serve
 # backend
