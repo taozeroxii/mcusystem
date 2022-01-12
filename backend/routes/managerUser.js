@@ -1,8 +1,5 @@
 const router = require("express").Router();
 const {loginMiddleWare,encodeJwt} = require("../configs/jwt")
-const jwt = require("jwt-simple");
-const SECRET = "@Cpa10665#!";
-
 
 router.post("/login", loginMiddleWare, (req, res) => {
   const payload = {
