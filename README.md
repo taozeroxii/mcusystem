@@ -1,6 +1,6 @@
 ## หน้าแสดงรายการอุณหภูมิความชื้น รพ ใช้งานด้วย node js + vue js 
      แสดงค่าอุณหภูมิไฟและความชื้น
-    # fontend
+# fontend
      หน้า src/views/form/tableshowdata จะมีส่วนการดุึงข้อมูลจาก backend 
      โดยใช้เป็น local ip 172.16.0.251 ไว้หาก clone มา
      เปลียนเป็น http://localhost/:portที่กำหนดในbackend 
