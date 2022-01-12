@@ -4,8 +4,6 @@ const server = express(); //use express
 server.use(cors())
 require('dotenv').config();//config ค่าใน env ไฟล์
 
-
-
 const bodyParser = require("body-parser"); // paser data json format
 // const pgconnection = require("./configs/database"); //connect postgresql
 require('node-datetime-thai');
@@ -16,8 +14,6 @@ server.use(bodyParser.json({ limit: "500MB" }));
 
 const config = require("./configs"); //config port and jobschdue
 const { PORT } = config; // เรียกใช้ port จากไฟล์config
-// const moment = require("moment");
-const con = require("./configs/mycon"); //connect mysql
 const routes = require('./routes');
 
 server.use('/api',routes);

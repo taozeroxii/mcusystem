@@ -1,4 +1,4 @@
-const connection = require("../configs/mycon");
+const connection = require("../configs/database");
 
 module.exports = {
   mcu_now() {
