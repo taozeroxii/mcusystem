@@ -13,11 +13,11 @@ const jwtOptions = {
 
 const jwtAuth = new JwtStrategy(jwtOptions, (payload, done) => {
   connection.query(`SELECT * from userlogin where username = '${payload.sub}'`, (error, result) => {
-    if (error) return ;
+    if (error) return done(null, false);;
     // console.log(result[0])
     if (payload.sub === result[0].username && payload.timeOut > new Date().getTime())
     done(null, true);
-  else done(null, false);
+    else done(null, false);
   });
   
 });
