@@ -2,6 +2,8 @@ const express = require("express");
 var cors = require('cors')
 const server = express(); //use express
 server.use(cors())
+require('dotenv').config();//config ค่าใน env ไฟล์
+
 
 
 const bodyParser = require("body-parser"); // paser data json format
