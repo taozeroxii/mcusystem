@@ -11,6 +11,7 @@ require('node-datetime-thai');
 // `ตั้งค่าการ parse ตัวแปรเมื่อ client request หรือส่งข้อมูลเข้ามา
 server.use(bodyParser.urlencoded({ extended: false, limit: "500MB" }));
 server.use(bodyParser.json({ limit: "500MB" }));
+server.use(require('./configs/middleware'));//เรียกใช้ middleware สำหรับการตอบกลับ error 
 
 const config = require("./configs"); //config port and jobschdue
 const { PORT } = config; // เรียกใช้ port จากไฟล์config

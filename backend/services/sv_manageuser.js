@@ -1,0 +1,40 @@
+const connection = require("../configs/database");
+const { password_hash, password_valify } = require("../configs/jwt");
+
+module.exports = {
+    register(value) {
+    // value.password = await password_hash(value.password);
+    // return(value );
+    return new Promise(async(resolve, reject) => {
+      value.password = await password_hash(value.password);
+      await connection.query(`INSERT INTO userlogin SET ?`, value, (error, result) => {
+          if (error) return;
+          resolve(result);
+        }
+      );
+    });
+  },
+  
+  onLogin(value) {
+    return new Promise((resolve, reject) => {
+      connection.query(  "select * from userlogin where username =?", [value.username],(err, result) => {
+          if (err) return reject(error);
+        //   console.log(result.length)
+        //   return resolve(result[0]);
+          if (result.length > 0) {
+            const userLogin = result[0];
+            const a =  password_valify(value.password, userLogin.password)
+            // console.log( a)
+            if (password_valify(value.password, userLogin.password)) {
+              delete userLogin.password;
+            //   delete userLogin.u_created;
+            //   delete userLogin.u_updated;
+              return resolve(userLogin);
+            }
+          }
+          reject(new Error("Invalid username or password "));
+        }
+      );
+    });
+  },
+};

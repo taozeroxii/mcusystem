@@ -1,9 +1,10 @@
-// const crypto = require('crypto');
+const bcrypt = require('bcrypt');
 const passport = require("passport");
 const jwt = require("jwt-simple");
 const ExtractJwt = require("passport-jwt").ExtractJwt;
 const JwtStrategy = require("passport-jwt").Strategy;
 const SECRET = "@Cpa10665#!";
+const connection = require("../configs/database");
 
 const jwtOptions = {
   jwtFromRequest: ExtractJwt.fromHeader("authorization"),
@@ -11,21 +12,32 @@ const jwtOptions = {
 };
 
 const jwtAuth = new JwtStrategy(jwtOptions, (payload, done) => {
-  if (payload.sub === "kennaruk" && payload.timeOut > new Date().getTime())
+  connection.query(`SELECT * from userlogin where username = '${payload.sub}'`, (error, result) => {
+    if (error) return ;
+    // console.log(result[0])
+    if (payload.sub === result[0].username && payload.timeOut > new Date().getTime())
     done(null, true);
   else done(null, false);
+  });
+  
 });
 
 requireJWTAuth = passport.authenticate("jwt", { session: false });
 passport.use(jwtAuth);
 
 const security = {
-  // password_hash(password) {
-  //     return crypto.createHash('sha1').update(password).digest('hex');
-  // },
-  // password_valify(password, password_hash) {
-  //     return security.password_hash(password) === password_hash;
-  // },
+  async password_hash(password) {
+    const saltRounds = 10;
+    const salt = await bcrypt.genSalt(saltRounds);
+    const passwordhashed = await bcrypt.hash(password,salt)
+    return passwordhashed;
+  },
+  async password_valify(password, password_hash) {
+   await bcrypt.compare(password, password_hash, function( result) {
+      return result;
+    });
+   
+  },
 
   requireJWTAuth() {
     return requireJWTAuth;
@@ -40,19 +52,6 @@ const security = {
     if (req.body.username === "kennaruk" && req.body.password === "mak") next();
     else res.send("Wrong username and password");
   },
-  // ตรวจสอบการเข้าถึงหน้า
-  // isInRoles(roles = []){
-  //     return function (req,res,next){
-  //         //console.log(req.session.userLogin)
-  //         try{
-  //             if(roles.indexOf(req.session.userLogin.u_role) >= 0 )return next();
-  //             throw new Error('Forbidden');
-  //         }
-  //         catch(ex){
-  //             res.status(403).json({message : ex.message})
-  //         }
-  //     }
-  // }
 };
 
 module.exports = security;
