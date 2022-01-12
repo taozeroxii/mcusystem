@@ -6,6 +6,19 @@
      npm install
      npm run serve
 # backend
-     1.ตั้งค่า Config Db ในไฟล์ .env
+     1.สร้างไฟล์ .env ใน directory backend  copy code ด้านล่างและ   ตั้งค่า Config Db เพื่อเชื่อมต่อฐานข้อมูล
+          #connection MYSQL
+          MYSQL_HOST=host
+          MYSQL_USER=usernamedb
+          MYSQL_PASSWORD=passworddb
+          MYSQL_DB=dbname
+          MYSQL_PORT=3306
+          # API connection POSTGRE SQL
+          PGSQL_HOST=host
+          PGSQL_USER=usernamedb
+          PGSQL_PASSWORD=passworddb
+          PGSQL_DB=dbname
+          PGSQL_PORT=5432
+
      2.npm i
      3.npm start 
