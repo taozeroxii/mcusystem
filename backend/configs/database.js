@@ -5,7 +5,7 @@ const pgconnection = new Pool({
   password:  process.env.PGSQL_PASSWORD,
   database:  process.env.PGSQL_DB,
   charset:'utf8',
-  port: 5432
+  port: process.env.PG_PORT
 });
 
 module.exports = pgconnection;
