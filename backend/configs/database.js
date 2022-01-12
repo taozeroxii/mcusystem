@@ -1,3 +1,4 @@
+// --------------------------------------------------------------------- CONNECTION postgresql --------------------------------------------------------------
 const { Pool, Client } = require('pg')
 const pgconnection = new Pool({
   host:      process.env.PGSQL_HOST,
@@ -10,9 +11,6 @@ const pgconnection = new Pool({
 module.exports = pgconnection;
 
 // --------------------------------------------------------------------- CONNECTION MYSQL --------------------------------------------------------------
-const mysql = require('mysql');
-// require('dotenv').config();
-
 //- MYSQL Module
 try{
   var mysql_npm = require('../node_modules/mysql');
