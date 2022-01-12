@@ -16,6 +16,7 @@ const jwtAuth = new JwtStrategy(jwtOptions, (payload, done) => {
   else done(null, false);
 });
 
+requireJWTAuth = passport.authenticate("jwt", { session: false });
 passport.use(jwtAuth);
 
 const security = {
@@ -26,11 +27,12 @@ const security = {
   //     return security.password_hash(password) === password_hash;
   // },
 
-  requireJWTAuth(){
-      return requireJWTAuth = passport.authenticate("jwt", { session: false });
+  requireJWTAuth() {
+    return requireJWTAuth;
   },
-  encodeJwt(payload){
-    return jwt.encode(payload, SECRET)
+
+  encodeJwt(payload) {
+    return jwt.encode(payload, SECRET);
   },
 
   //ตรวจสอบการเข้าสู่ระบบ
