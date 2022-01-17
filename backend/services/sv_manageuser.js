@@ -1,34 +1,43 @@
 const connection = require("../configs/database");
-const { password_hash, password_valify } = require("../configs/jwt");
+const security = require("../configs/bcrypt");
 
 module.exports = {
-    register(value) {
+  register(value) {
     // value.password = await password_hash(value.password);
     // return(value );
-    return new Promise(async(resolve, reject) => {
-      value.password = await password_hash(value.password);
-      await connection.query(`INSERT INTO userlogin SET ?`, value, (error, result) => {
+    return new Promise(async (resolve, reject) => {
+      value.password = await security.password_hash(value.password);
+      await connection.query(
+        `INSERT INTO userlogin SET ?`,
+        value,
+        (error, result) => {
+          console.log(value);
           if (error) return;
           resolve(result);
         }
       );
     });
   },
-  
+
   onLogin(value) {
     return new Promise((resolve, reject) => {
-      connection.query(  "select * from userlogin where username =?", [value.username],(err, result) => {
+      connection.query(
+        "select * from userlogin where username =?",
+        [value.username],
+        async (err, result) => {
           if (err) return reject(error);
-        //   console.log(result.length)
-        //   return resolve(result[0]);
+          //   console.log(result.length)
+          //   return resolve(result[0]);
           if (result.length > 0) {
             const userLogin = result[0];
-            const a =  password_valify(value.password, userLogin.password)
-            // console.log( a)
-            if (password_valify(value.password, userLogin.password)) {
+            const a = await security.password_valify(
+              value.password,
+              userLogin.password
+            );
+            if (a) {
               delete userLogin.password;
-            //   delete userLogin.u_created;
-            //   delete userLogin.u_updated;
+              // delete userLogin.u_created;
+              // delete userLogin.u_updated;
               return resolve(userLogin);
             }
           }

@@ -1,6 +1,5 @@
 const router = require("express").Router();
-const passport = require("passport");
-requireJWTAuth = passport.authenticate("jwt", { session: false });
+const requireJWTAuth = require("../configs/jwt");
 
 router.use("/mcusystem", requireJWTAuth, require("./mcusystem"));
 router.use("/managerUser", require("./managerUser"));

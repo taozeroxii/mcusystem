@@ -1,50 +1,55 @@
 const router = require("express").Router();
-const { check } = require("express-validator");
-const {loginMiddleWare,encodeJwt} = require("../configs/jwt")
+const jwt = require("jwt-simple");
 const services = require("../services/sv_manageuser");
+const { check } = require("express-validator");
 
-// router.post("/login", loginMiddleWare, (req, res) => {
+const loginMiddleWare = async (req, res, next) => {
+  try {
+    const model = await services.onLogin(req.body);
+    if (!model) throw new Error("ไม่พบข้อมูลที่ค้นหา");
+    res.json(model);
+  } catch (ex) {
+    res.error(ex);
+  }
+  // if (req.body.username === "kennaruk" && req.body.password === "mak") next();
+  // else res.send("Wrong username and password");
+};
+
+router.post(
+  "/register",
+  [
+    check("username", "กรุณากรอกข้อมูลusername").not().isEmpty(),
+    check("password").not().isEmpty(),
+  ],
+  async (req, res) => {
+    console.log(req);
+    try {
+      req.validate();
+      const created = await services.register(req.body);
+      res.json(created);
+    } catch (ex) {
+      res.error(ex);
+    }
+  }
+);
+// router.post("/register", (req, res) => {
 //   const payload = {
 //     sub: req.body.username,
 //     iat: new Date().getTime(),
 //     timeOut: new Date().getTime() + 1000 * 60 * 60 * 24,
 //   };
-//   res.send(encodeJwt(payload));
+
+//   res.send(jwt.encode(payload, process.env.TOKEN_KEY));
 // });
 
-router.post('/register', [
-  check('username', 'กรุณากรอกข้อมูลusername').not().isEmpty(),
-  check('password').not().isEmpty(),
-], async (req, res) => {
-  try {
-      req.validate();
-      const created = await services.register(req.body);
-      res.json(created);
-  }
-  catch (ex) {
-      res.error(ex);
-  }
-});
+router.post("/login", loginMiddleWare, (req, res) => {
+  const payload = {
+    sub: req.body.username,
+    iat: new Date().getTime(),
+    timeOut: new Date().getTime() + 1000 * 60 * 60 * 24,
+  };
 
-
-router.post('/logins', [
-  check('username').not().isEmpty(),
-  check('password').not().isEmpty()
-], async (req, res) => {
-  try {
-      req.validate();
-      const userLogin = await services.onLogin(req.body);
-      const payload = {
-        sub: userLogin.username,
-        iat: new Date().getTime(),
-        timeOut: new Date().getTime() + 1000 * 60 * 60 * 24,
-      };
-      res.send(encodeJwt(payload));
-      // res.json(userLogin)
-  }
-  catch (ex) {
-      res.error(ex);
-  }
+  res.send(jwt.encode(payload, process.env.TOKEN_KEY));
 });
 
 module.exports = router;
