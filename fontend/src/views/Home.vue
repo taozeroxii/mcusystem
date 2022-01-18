@@ -49,9 +49,12 @@ export default {
 
   async created() {
     // await this.checkLogin();
+    console.log(localStorage.getItem("token"));
     this.loading = true;
     axios
-      .get("api/mcusystem")
+      .get("api/mcusystem/", {
+        headers: { authorization: localStorage.getItem("token") },
+      })
       .then((response) => {
         this.loading = false;
         this.ck_connect = false;
@@ -94,7 +97,9 @@ export default {
     update_temp_interva() {
       this.myInterval = setInterval(() => {
         axios
-          .get("api/mcusystem")
+          .get("api/mcusystem/", {
+            headers: { authorization: localStorage.getItem("token") },
+          })
           .then((response) => {
             // this.dataforcard.temnow = response.data.mcu_temp;
             // this.dataforcard.moisture_now = response.data.mcu_moisture;

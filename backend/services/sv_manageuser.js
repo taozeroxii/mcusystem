@@ -18,7 +18,6 @@ module.exports = {
       );
     });
   },
-
   onLogin(value) {
     return new Promise((resolve, reject) => {
       connection.query(
