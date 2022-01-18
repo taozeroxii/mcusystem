@@ -10,7 +10,6 @@ const loginMiddleWare = async (req, res, next) => {
     const payload = {
       sub: req.body.username,
       iat: new Date().getTime(),
-      timeOut: new Date().getTime() + 1000 * 60 * 60 * 24,
     };
     model.token = jwt.encode(payload, process.env.TOKEN_KEY);
     // model.token = jwt.decode(model.token, process.env.TOKEN_KEY);
@@ -28,6 +27,7 @@ router.post(
     check("pname", "กรุณากรอกคำนำหน้า").not().isEmpty(),
     check("fname", "กรุณากรอกชื่อจริง").not().isEmpty(),
     check("lname", "กรุณากรอกนามสกุล").not().isEmpty(),
+    check("token", "กรุณากรอกนามสกุล").not().isEmpty(),
   ],
   async (req, res) => {
     console.log(req);

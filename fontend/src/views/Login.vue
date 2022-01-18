@@ -15,7 +15,7 @@
       ></v-text-field>
       <v-btn type="submit" color="success" class="mr-4"> submit </v-btn>
       <v-btn @click="clearform()" class="mr-4" color="secondary"> clear </v-btn>
-      <v-btn to="/About" color="#018786" dark> register </v-btn>
+      <v-btn to="/Register" color="#018786" dark> register </v-btn>
     </form></v-container
   >
 </template>
@@ -34,11 +34,9 @@ export default {
   },
   methods: {
     onSubmit() {
-      console.log(this.form);
       axios
         .post("api/managerUser/login", this.form)
         .then((response) => {
-          console.log(response.data);
           const data = response.data;
           localStorage.setItem("token", data.token);
           localStorage.setItem("fname", data.fname);

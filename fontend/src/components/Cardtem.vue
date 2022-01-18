@@ -1,25 +1,35 @@
 <template>
   <v-card color="white" class="mx-auto loading rounded-xl" max-width="100%">
-    <v-card-title>
-      <h3>{{ this.$props.dataforcard.mcu_addr }}</h3>
+    <v-card-title :class="this.overload ? 'red darken-4' : ''">
+      <h3 :class="this.overload ? 'white--text' : ''">
+        {{ this.$props.dataforcard.mcu_addr }}
+      </h3>
       <v-spacer></v-spacer>
       <div v-if="this.$props.dataforcard.status">
-        <v-icon class="green--text form-control">
+        <v-icon
+          class="form-control"
+          :class="this.overload ? 'white--text' : 'green--text'"
+        >
           mdi-checkbox-marked-circle-outline</v-icon
         >
         <sub
-          class="font-italic green--text text-decoration-overline"
+          class="font-italic text-decoration-overline"
+          :class="this.overload ? 'white--text' : 'green--text'"
           style="font-size: 10px"
         >
           Connect</sub
         >
       </div>
       <div v-else>
-        <v-icon class="red--text form-control">
+        <v-icon
+          class="form-control"
+          :class="this.overload ? 'white--text' : 'red--text'"
+        >
           mdi-filter-remove-outline</v-icon
         >
         <sub
-          class="font-italic red--text text-decoration-overline"
+          class="font-italic text-decoration-overline"
+          :class="this.overload ? 'white--text' : 'red--text'"
           style="font-size: 10px"
         >
           Disconnect</sub
@@ -92,6 +102,7 @@ export default {
   data() {
     return {
       show: false,
+      overload: false,
     };
   },
   props: {
@@ -100,7 +111,12 @@ export default {
     },
   },
   mounted() {
-    //   console.log(this.dataforcard)
+    if (
+      this.$props.dataforcard.temnow >= 27 ||
+      this.$props.dataforcard.moisture_now >= 60 ||
+      this.$props.dataforcard.elect < 200
+    )
+      this.overload = true;
   },
 };
 </script>
