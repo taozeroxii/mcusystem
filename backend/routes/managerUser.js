@@ -8,11 +8,31 @@ const loginMiddleWare = async (req, res, next) => {
     const model = await services.onLogin(req.body);
     if (!model) throw new Error("ไม่พบข้อมูลที่ค้นหา");
     const payload = {
-      sub: req.body.username,
+      sub: model.username,
+      level: model.level,
       iat: new Date().getTime(),
+      exp: new Date().getTime() + 1000 * 60 * 10,
     };
     model.token = jwt.encode(payload, process.env.TOKEN_KEY);
     // model.token = jwt.decode(model.token, process.env.TOKEN_KEY);
+    res.json(model);
+  } catch (ex) {
+    res.error(ex);
+  }
+};
+
+const CkRegisterMiddleWare = async (req, res, next) => {
+  try {
+    req.validate();
+    const token = jwt.decode(req.body.token, process.env.TOKEN_KEY);
+
+    if (new Date().getTime() > token.exp || token.level == 0) {
+      res.error("Token หมดอายุ กรุณาล็อคอินใหม่อีกครั้ง");
+      return;
+    }
+    delete req.body.token;
+    const model = await services.register(req.body);
+    if (!model) throw new Error("ไม่สำเร็จ");
     res.json(model);
   } catch (ex) {
     res.error(ex);
@@ -23,22 +43,13 @@ router.post(
   "/register",
   [
     check("username", "กรุณากรอก Username").not().isEmpty(),
-    check("password", "กรุณากรอก Username").not().isEmpty(),
-    check("pname", "กรุณากรอกคำนำหน้า").not().isEmpty(),
-    check("fname", "กรุณากรอกชื่อจริง").not().isEmpty(),
-    check("lname", "กรุณากรอกนามสกุล").not().isEmpty(),
-    check("token", "กรุณากรอกนามสกุล").not().isEmpty(),
+    check("password").not().isEmpty(),
+    check("pname").not().isEmpty(),
+    check("fname").not().isEmpty(),
+    check("lname").not().isEmpty(),
+    check("token").not().isEmpty(),
   ],
-  async (req, res) => {
-    console.log(req);
-    try {
-      req.validate();
-      const created = await services.register(req.body);
-      res.json(created);
-    } catch (ex) {
-      res.error(ex);
-    }
-  }
+  CkRegisterMiddleWare
 );
 // router.post("/register", (req, res) => {
 //   const payload = {

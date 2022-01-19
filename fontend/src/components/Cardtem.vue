@@ -21,15 +21,11 @@
         >
       </div>
       <div v-else>
-        <v-icon
-          class="form-control"
-          :class="this.overload ? 'white--text' : 'red--text'"
-        >
+        <v-icon class="form-control white--text">
           mdi-filter-remove-outline</v-icon
         >
         <sub
-          class="font-italic text-decoration-overline"
-          :class="this.overload ? 'white--text' : 'red--text'"
+          class="font-italic text-decoration-overline white--text"
           style="font-size: 10px"
         >
           Disconnect</sub
@@ -114,7 +110,8 @@ export default {
     if (
       this.$props.dataforcard.temnow >= 27 ||
       this.$props.dataforcard.moisture_now >= 60 ||
-      this.$props.dataforcard.elect < 200
+      this.$props.dataforcard.elect < 200 ||
+      !this.$props.dataforcard.status
     )
       this.overload = true;
   },

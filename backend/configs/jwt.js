@@ -7,7 +7,7 @@ const jwtOptions = {
   secretOrKey: process.env.TOKEN_KEY,
 };
 const jwtAuth = new JwtStrategy(jwtOptions, (payload, done) => {
-  // if (payload.sub === "kennaruk" && payload.timeOut > new Date().getTime())
+  // if (payload.sub === "kennaruk" && payload.exp > new Date().getTime())
   done(null, true);
   // else done(null, false);
 });

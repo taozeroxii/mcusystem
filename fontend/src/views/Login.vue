@@ -1,23 +1,29 @@
 <template>
   <v-container>
-    <form @submit.prevent="onSubmit()">
-      <v-text-field
-        label="username"
-        v-model="form.username"
-        required
-      ></v-text-field>
-      <v-text-field
-        :counter="6"
-        v-model="form.password"
-        label="password"
-        type="password"
-        required
-      ></v-text-field>
-      <v-btn type="submit" color="success" class="mr-4"> submit </v-btn>
-      <v-btn @click="clearform()" class="mr-4" color="secondary"> clear </v-btn>
-      <v-btn to="/Register" color="#018786" dark> register </v-btn>
-    </form></v-container
-  >
+    <v-row justify="center">
+      <v-col cols="12" xs="12" sm="8" md="6" lg="4" xl="4">
+        <form @submit.prevent="onSubmit()">
+          <v-text-field
+            label="username"
+            v-model="form.username"
+            required
+          ></v-text-field>
+          <v-text-field
+            :counter="6"
+            v-model="form.password"
+            label="password"
+            type="password"
+            required
+          ></v-text-field>
+          <v-btn type="submit" color="success" class="mr-4"> Login </v-btn>
+          <v-btn @click="clearform()" class="mr-4" color="secondary">
+            clear
+          </v-btn>
+          <v-btn to="/Register" color="#018786" dark> register </v-btn>
+        </form>
+      </v-col></v-row
+    >
+  </v-container>
 </template>
 
 <script>
@@ -59,4 +65,5 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+</style>

@@ -3,8 +3,6 @@ const security = require("../configs/bcrypt");
 
 module.exports = {
   register(value) {
-    // value.password = await password_hash(value.password);
-    // return(value );
     return new Promise(async (resolve, reject) => {
       value.password = await security.password_hash(value.password);
       await connection.query(
@@ -35,8 +33,6 @@ module.exports = {
             );
             if (a) {
               delete userLogin.password;
-              // delete userLogin.u_created;
-              // delete userLogin.u_updated;
               return resolve(userLogin);
             }
           }
