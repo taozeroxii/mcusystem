@@ -49,7 +49,6 @@ export default {
 
   async created() {
     // await this.checkLogin();
-    console.log(localStorage.getItem("token"));
     this.loading = true;
     axios
       .get("api/mcusystem/", {
@@ -58,19 +57,21 @@ export default {
       .then((response) => {
         this.loading = false;
         this.ck_connect = false;
-        for (var i = 0; i < response.data.length; i++) {
+        for (var i = 0; i < response.data.model.length; i++) {
           this.dataforcard.push({
-            id: response.data[i].mcu_id,
-            mcu_addr: response.data[i].mcu_addr,
-            temnow: response.data[i].mcu_temp,
+            id: response.data.model[i].mcu_id,
+            mcu_addr: response.data.model[i].mcu_addr,
+            temnow: response.data.model[i].mcu_temp,
             elect:
-              response.data[i].mcu_elect < 0 ? 0 : response.data[i].mcu_elect,
-            moisture_now: response.data[i].mcu_moisture,
-            updatetime: moment(response.data[i].mcu_update_time).format(
+              response.data.model[i].mcu_elect < 0
+                ? 0
+                : response.data.model[i].mcu_elect,
+            moisture_now: response.data.model[i].mcu_moisture,
+            updatetime: moment(response.data.model[i].mcu_update_time).format(
               "DD/MM/YYYY HH:mm:ss"
             ),
             status: this.alertErrorTime(
-              moment(response.data[i].mcu_update_time).format(
+              moment(response.data.model[i].mcu_update_time).format(
                 "YYYY-MM-DD HH:mm:ss"
               )
             ),
@@ -106,21 +107,22 @@ export default {
             // this.dataforcard.updatetime = moment(  response.data.mcu_update_time ).format("DD/MM/YYYY HH:mm:ss");
             this.ck_connect = false;
             this.dataforcard = [];
-            for (var i = 0; i < response.data.length; i++) {
+            localStorage.setItem("token", response.data.token);
+            for (var i = 0; i < response.data.model.length; i++) {
               this.dataforcard.push({
-                id: response.data[i].mcu_id,
-                mcu_addr: response.data[i].mcu_addr,
-                temnow: response.data[i].mcu_temp,
+                id: response.data.model[i].mcu_id,
+                mcu_addr: response.data.model[i].mcu_addr,
+                temnow: response.data.model[i].mcu_temp,
                 elect:
-                  response.data[i].mcu_elect < 0
+                  response.data.model[i].mcu_elect < 0
                     ? 0
-                    : response.data[i].mcu_elect,
-                moisture_now: response.data[i].mcu_moisture,
-                updatetime: moment(response.data[i].mcu_update_time).format(
-                  "DD/MM/YYYY HH:mm:ss"
-                ),
+                    : response.data.model[i].mcu_elect,
+                moisture_now: response.data.model[i].mcu_moisture,
+                updatetime: moment(
+                  response.data.model[i].mcu_update_time
+                ).format("DD/MM/YYYY HH:mm:ss"),
                 status: this.alertErrorTime(
-                  moment(response.data[i].mcu_update_time).format(
+                  moment(response.data.model[i].mcu_update_time).format(
                     "YYYY-MM-DD HH:mm:ss"
                   )
                 ),

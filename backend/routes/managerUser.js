@@ -51,15 +51,6 @@ router.post(
   ],
   CkRegisterMiddleWare
 );
-// router.post("/register", (req, res) => {
-//   const payload = {
-//     sub: req.body.username,
-//     iat: new Date().getTime(),
-//     timeOut: new Date().getTime() + 1000 * 60 * 60 * 24,
-//   };
-
-//   res.send(jwt.encode(payload, process.env.TOKEN_KEY));
-// });
 
 router.post("/login", loginMiddleWare);
 
