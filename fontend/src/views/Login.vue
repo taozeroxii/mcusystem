@@ -44,11 +44,7 @@ export default {
         .post("api/managerUser/login", this.form)
         .then((response) => {
           const data = response.data;
-          localStorage.setItem("token", data.token);
-          localStorage.setItem("fname", data.fname);
-          localStorage.setItem("lname", data.lname);
-          localStorage.setItem("pname", data.pname);
-          localStorage.setItem("username", data.username);
+          localStorage.setItem("token", data);
           this.$router.push("/");
         })
         .catch(() => {

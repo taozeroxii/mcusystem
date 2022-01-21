@@ -6,16 +6,22 @@ const { check } = require("express-validator");
 const loginMiddleWare = async (req, res, next) => {
   try {
     const model = await services.onLogin(req.body);
+
     if (!model) throw new Error("ไม่พบข้อมูลที่ค้นหา");
     const payload = {
       sub: model.username,
       level: model.level,
+      pname: model.pname,
+      fname: model.fname,
+      lname: model.lname,
       iat: new Date().getTime(),
       exp: new Date().getTime() + 1000 * 60 * 10,
     };
-    model.token = jwt.encode(payload, process.env.TOKEN_KEY);
-    // model.token = jwt.decode(model.token, process.env.TOKEN_KEY);
-    res.json(model);
+    const token = jwt.encode(payload, process.env.TOKEN_KEY);
+    // const detoken = jwt.decode(token, process.env.TOKEN_KEY);
+    // console.log(detoken);
+
+    res.json(token);
   } catch (ex) {
     res.error(ex);
   }

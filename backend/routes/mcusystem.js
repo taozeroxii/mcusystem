@@ -24,4 +24,23 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.post("/checkJWTexpire", async (req, res) => {
+  try {
+    const tokendata = jwt.decode(
+      req.headers.authorization,
+      process.env.TOKEN_KEY
+    );
+    var userloginData = {
+      token: req.headers.authorization,
+      username: tokendata.username,
+      level: tokendata.level,
+      fname: tokendata.fname,
+      lname: tokendata.lname,
+      pname: tokendata.niname,
+    };
+    res.status(200).json(userloginData);
+  } catch (ex) {
+    res.error(ex);
+  }
+});
 module.exports = router;

@@ -23,7 +23,7 @@ module.exports = {
         [value.username],
         async (err, result) => {
           if (err) return reject(error);
-          //   console.log(result.length)
+          // console.log(result.length);
           //   return resolve(result[0]);
           if (result.length > 0) {
             const userLogin = result[0];
