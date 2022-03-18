@@ -12,6 +12,9 @@
       <template v-slot:extension>
         <v-tabs align-with-title>
           <v-tab to="/"> HOME &nbsp;<v-icon small>home </v-icon></v-tab>
+          <v-tab to="/Chart"
+            >Chart &nbsp; <v-icon small>analytics</v-icon></v-tab
+          >
           <v-tab to="/about">About &nbsp; <v-icon small>info</v-icon></v-tab>
           <v-tab to="/Login">
             Login &nbsp;<v-icon small>mdi-login</v-icon></v-tab

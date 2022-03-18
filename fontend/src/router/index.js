@@ -34,6 +34,11 @@ const router = new VueRouter({
       name: "Register",
       component: () => import("../views/Register.vue"),
     },
+    {
+      path: "/Chart",
+      name: "Chart",
+      component: () => import("../views/Chart.vue"),
+    },
 
     { path: "*", component: PageNotFound },
   ],
